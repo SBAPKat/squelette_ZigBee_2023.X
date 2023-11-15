@@ -1,35 +1,35 @@
 /*
  * File:   main.c
  * programmation de l'UART du PIC18F45K20 par interruption
- * Author: MD TRAN
+ * Author: Jules et Benjamin
  * TP EN51: Mise en oeuvre technologie ZigBee et Bluetooth
  * Created on 13 septembre 2018, 08:51
- * Modifié le 23/10/2023
- *  - Détection message : <LF>OK<CR> idem \nOK\r\n
- *              trame complète : <CR><LF>OK<CR><LF>
- *  - Détection message : CONNECT  "0012-6F-00C726"<CR>
- *              trame complète : <CR><LF>"0012-6F-00C726"<CR><LF>
+ * Modifiï¿½ le 23/10/2023
+ *  - Dï¿½tection message : <LF>OK<CR> idem \nOK\r\n
+ *              trame complï¿½te : <CR><LF>OK<CR><LF>
+ *  - Dï¿½tection message : CONNECT  "0012-6F-00C726"<CR>
+ *              trame complï¿½te : <CR><LF>"0012-6F-00C726"<CR><LF>
  */
 
 #include <xc.h>
-#include "tmd_lib_v0.h"     //Bibliothèque de MD Tran
+#include "tmd_lib_v0.h"     //Bibliothï¿½que de MD Tran
 #include "configFuse.h"     //Configuration du PIC
-#define _XTAL_FREQ 10000000 //Quartz 10 MHz utlisé
+#define _XTAL_FREQ 10000000 //Quartz 10 MHz utlisï¿½
 
-//Déclaration des variables globales
+//Dï¿½claration des variables globales
 bit flag_CONNECT=0;
 bit flag_OK=0;
-//Paramètres de gestion UART
+//Paramï¿½tres de gestion UART
 #define buffin_size 60              // taille du buffer
-char Data=0, Data_1=0, Data_2=0;    // initialisation tampon départ 
-char buffin[buffin_size];           // buffer de réception usart
-int  rw_ptr = 0;                    // pointeur réception usart
+char Data=0, Data_1=0, Data_2=0;    // initialisation tampon dï¿½part 
+char buffin[buffin_size];           // buffer de rï¿½ception usart
+int  rw_ptr = 0;                    // pointeur rï¿½ception usart
 int NbrInt=0;
-short int TrameStart, TrameFin, TrameERROROK;// drapeaux de détection
-char Start,Start1,Start2;           // caractères début trame
+short int TrameStart, TrameFin, TrameERROROK;// drapeaux de dï¿½tection
+char Start,Start1,Start2;           // caractï¿½res dï¿½but trame
 
 
-//Déclaration des prototypes
+//Dï¿½claration des prototypes
 void Delay1Second(void);
 void Delay200_ms(void);
 void Delay100_ms(void);
@@ -39,7 +39,7 @@ void wait_CONNECT();
 //Programme principale
 void main(void)
 {
-    //déclaration des variables locales
+    //dï¿½claration des variables locales
     int i=0;    
     /* Initialisation Timer, ports et UART*/
     iniPorts();
@@ -50,7 +50,7 @@ void main(void)
     RCIP = 0; //Not high priority
     RCIE = 1; //Enable RX interrupt
     PEIE = 1; //Enable pheripheral interrupt (serial port is a pheripheral)
-    GIE = 1; //interruption générale
+    GIE = 1; //interruption gï¿½nï¿½rale
 
     for(i=0;i<2;i++)    //temporisation sans Timer
     {
@@ -59,7 +59,7 @@ void main(void)
 
     //1. Envoi de commande AT
     printf("at\r"); //Envoi de la commande "AT\r" pour test
-    //2. Attente réponse "\nOK\r"
+    //2. Attente rï¿½ponse "\nOK\r"
     wait_OK();      
     
     //suite de votre programme est ici
@@ -68,10 +68,10 @@ void main(void)
     
     //boucle infinie pour test
     while(1){
-        LATA4 = 0;      //la LED d6 est connecté sur le port RA4
-        __delay_ms(20); //délai de 20 ms
+        LATA4 = 0;      //la LED d6 est connectï¿½ sur le port RA4
+        __delay_ms(20); //dï¿½lai de 20 ms
         LATA4 = 1;
-        Delay1Second(); //délai de 1s
+        Delay1Second(); //dï¿½lai de 1s
     }
 }
 
@@ -80,13 +80,13 @@ void main(void)
 void interrupt isr(void)
 {
     int i=0; 
-    if(PIR1bits.RCIF == 1) {    //interruption déclenchée par l'UART
+    if(PIR1bits.RCIF == 1) {    //interruption dï¿½clenchï¿½e par l'UART
         PIR1bits.RCIF = 0;      //initialisation de la valeur du drapeau
-        LATA4=~LATA4;           //inversion l'état de la Led pour test
+        LATA4=~LATA4;           //inversion l'ï¿½tat de la Led pour test
         Data= RCREG;            //lecture de la valeur du buffer RX
-        NbrInt++;               //incrémentation du nombre de caractères reçus
+        NbrInt++;               //incrï¿½mentation du nombre de caractï¿½res reï¿½us
 
-        //Détection début trame
+        //Dï¿½tection dï¿½but trame
         //Exemple ( Data=='K' && Data_1=='O' && Data_2=='\n'))
         if( Data==Start2 && Data_1==Start1 && Data_2==Start) {
              TrameStart=1;
@@ -99,21 +99,21 @@ void interrupt isr(void)
         if (TrameStart) {
              rw_ptr++;
              buffin[rw_ptr]=Data;
-             //Détection fin trame '\r' (Carriage Return)
+             //Dï¿½tection fin trame '\r' (Carriage Return)
              if( Data == '\r') {    
                  TrameStart=0;
                  TrameFin=1;
                  switch (rw_ptr) {
 
-                    case 4: //\nOK\r    4 caractères détectés
+                    case 4: //\nOK\r    4 caractï¿½res dï¿½tectï¿½s
                             flag_OK=1;
                     break;
 
-                    case 26: //CONNECT  "0012-6F-00C726"\r soit 26 caractères détectés
+                    case 26: //CONNECT  "0012-6F-00C726"\r soit 26 caractï¿½res dï¿½tectï¿½s
                             flag_CONNECT=1;
                     break;
 
-                    default: //erreur de détection
+                    default: //erreur de dï¿½tection
                             //printf("Error\r\n");
                             TrameERROROK=1;
                     break; 
@@ -164,25 +164,25 @@ void Delay100_ms()
 
 void wait_OK()
 {
-    //attente réponse :"\r\nOK\r\n"
+    //attente rï¿½ponse :"\r\nOK\r\n"
     Start='\n';
     Start1='O';
     Start2='K';
     flag_OK=0;
-    LATA4 = 0;  //led allumée
-    while(!flag_OK){   //prévoir une sortie de la boucle avec une variavle de retour!
+    LATA4 = 0;  //led allumï¿½e
+    while(!flag_OK){   //prï¿½voir une sortie de la boucle avec une variavle de retour!
     }
     flag_OK=0;
-    LATA4 = 1;  //led éteinte, confirmation de réception
+    LATA4 = 1;  //led ï¿½teinte, confirmation de rï¿½ception
 }
 
 void wait_CONNECT(){
-    //attente connexion avec réponse : CONNECT  "0012-6F-00C726"\r
+    //attente connexion avec rï¿½ponse : CONNECT  "0012-6F-00C726"\r
     Start='C';
     Start1='O';
     Start2='N';
     flag_CONNECT=0;
-    while(!flag_CONNECT){   //prévoir une sortie de cette boucle
+    while(!flag_CONNECT){   //prï¿½voir une sortie de cette boucle
         flag_CONNECT=0;
         LATA4 = 0;
         Delay200_ms();
