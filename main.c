@@ -107,7 +107,10 @@ void main(void)
     // Allumer la led D4 
     printf("ats18=00000000\r"); //data register
     wait_OK();
-
+    //delai 1s
+    Delay1Second();
+    //eteindre la led D4
+    printf("ats18=00000001\r"); //data register
 
 
 
