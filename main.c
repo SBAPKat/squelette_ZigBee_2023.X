@@ -88,6 +88,9 @@ void main(void)
     printf("ats0A=4276:password\r");
     wait_OK();
 
+    //connection au réseau
+    printf("AT+JN\r");
+    wait_OK();
 
 
 
