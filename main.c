@@ -101,6 +101,15 @@ void main(void)
     printf("AT+UCAST:0000=Hello from microchip JULES&BEN\r");
     wait_OK();
 
+    //Allumer la led D4 locale
+    printf("ats16=0001\r"); //data direction register
+    wait_OK();
+    // Allumer la led D4 
+    printf("ats18=0000\r"); //data register
+    wait_OK();
+
+
+
 
 
     
