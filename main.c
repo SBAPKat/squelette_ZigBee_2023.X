@@ -24,6 +24,7 @@
 
 //D�claration des variables globales
 bit flag_CONNECT=0;
+bit flag_OPEN=0;
 bit flag_OK=0;
 //Param�tres de gestion UART
 #define buffin_size 60              // taille du buffer
@@ -41,7 +42,7 @@ void Delay200_ms(void);
 void Delay100_ms(void);
 void wait_OK();
 void wait_CONNECT();
-
+void wait_OPEN();
 //Programme principale
 void main(void)
 {
@@ -122,7 +123,7 @@ void main(void)
 
     //entrer data mode
     printf("AT+DMODE:0000\r");
-    wait_CONNECT();
+    wait_OPEN();
     printf("Hello from data mode");
     printf("+++"); //quitter data mode
 
@@ -256,5 +257,19 @@ void wait_CONNECT(){
 
 }
 
+void wait_OPEN(){
+    //attente connexion avec r�ponse : CONNECT  "0012-6F-00C726"\r
+    Start='O';
+    Start1='P';
+    Start2='E';
+    flag_OPEN=0;
+    while(!flag_OPEN){   //pr�voir une sortie de cette boucle
+        flag_OPEN=0;
+        LATA4 = 0;
+        Delay200_ms();
+        LATA4 = 1;
+        Delay200_ms();
+     }
+}
 
 
