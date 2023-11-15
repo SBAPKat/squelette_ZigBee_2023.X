@@ -120,6 +120,12 @@ void main(void)
     wait_OK();
 
 
+    //entrer data mode
+    printf("AT+DMODE:0000\r");
+    wait_CONNECT();
+    printf("Hello from data mode");
+    printf("+++"); //quitter data mode
+
 
 
 
