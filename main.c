@@ -4,7 +4,7 @@
  * Author: Jules et Benjamin
  * TP EN51: trop de code jjjjjj
  * Created on 13 septembre 2018, 08:51
- * Modifi� le 23/10/2023
+ * Modifi� le 23/23/23/23/23/23
  *  - D�tection message : <LF>OK<CR> idem \nOK\r\n
  *              trame compl�te : <CR><LF>OK<CR><LF>
  *  - D�tection message : CONNECT  "0012-6F-00C726"<CR>
