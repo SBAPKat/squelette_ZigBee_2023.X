@@ -126,12 +126,8 @@ void main(void)
     wait_OPEN();
     printf("Hello from data mode\r");
     //quitter data mode
-    Delay100_ms();
-    printf("+");
-    Delay100_ms();
-    printf("+");
-    Delay100_ms();
-    printf("+");
+    Delay1Second();
+    printf("+++");
 
 
 
