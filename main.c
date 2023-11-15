@@ -102,10 +102,10 @@ void main(void)
     wait_OK();
 
     //Allumer la led D4 locale
-    printf("ats16=0001\r"); //data direction register
+    printf("ats16=00000001\r"); //data direction register
     wait_OK();
     // Allumer la led D4 
-    printf("ats18=0000\r"); //data register
+    printf("ats18=00000000\r"); //data register
     wait_OK();
 
 
