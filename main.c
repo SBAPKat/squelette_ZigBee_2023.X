@@ -89,7 +89,7 @@ void main(void)
     wait_OK();
 
     //connection au réseau
-    printf("AT+JN\r");
+    printf("AT+JPAN:25:3AF6\r");
     wait_OK();
 
 
