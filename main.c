@@ -12,7 +12,9 @@
  * 
  * ADRESSE MAC 1 : 000D6F000B30825F
  * ADRESSE MAC 2: 000D6F000B30C4A4
- * RES : JPAN:25,3AF6,9B0864BF332F58B8
+ * RES : JPAN:14,7551,7B8A1FD95847279B
+ * ZED:000D6F000B30C4A4,1BA6
+
  */
 
 #include <xc.h>
@@ -80,16 +82,19 @@ void main(void)
 
     //setup sécurité
     //Network Key
-    printf("ats08=09000000000660000000000000000011:password\r");
+    //printf("ats08=09000000000660000000000000000011:password\r");
     //link key
+    //wait_OK();
     printf("ats09=09000000000660000000000000000011:password\r");
-
-    //activer la sécurité S0A bit 8 = 1, 4 = 1 et 2 = 1 + end device
-    printf("ats0A=4276:password\r");
     wait_OK();
 
+    //activer la sécurité S0A bit 8 = 1, 4 = 1 et 2 = 1 + end device
+    printf("ats0A=8114:password\r");
+    wait_OK();
+    printf("ats0A?\r");
+    wait_OK();
     //connection au réseau
-    printf("AT+JPAN:25:3AF6\r");
+    printf("AT+JPAN:14:7551\r");
     wait_OK();
 
 
