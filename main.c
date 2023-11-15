@@ -97,6 +97,9 @@ void main(void)
     printf("AT+JPAN:14:7551\r");
     wait_OK();
 
+    //unicast vers coordinateur
+    printf("AT+UCAST:0000=Hello from microchip JULES&BEN\r");
+    wait_OK();
 
 
 
