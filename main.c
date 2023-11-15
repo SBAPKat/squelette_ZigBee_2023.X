@@ -10,7 +10,8 @@
  *  - D�tection message : CONNECT  "0012-6F-00C726"<CR>
  *              trame compl�te : <CR><LF>"0012-6F-00C726"<CR><LF>
  * 
- * ADRESSE MAC : 000D6F000B30825F
+ * ADRESSE MAC 1 : 000D6F000B30825F
+ * ADRESSE MAC 2: 000D6F000B30C4A4
  */
 
 #include <xc.h>
