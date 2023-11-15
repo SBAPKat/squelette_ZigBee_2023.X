@@ -63,7 +63,16 @@ void main(void)
     wait_OK();      
     
     //suite de votre programme est ici
-    //.........
+    //restauration des parametres par defaut
+    printf("at&f\r"); //Envoi de la commande 
+    wait_OK();      //attente r�ponse "\nOK\r"
+    //demander le rôle de notre appareil FFD, ZED, ZR ats0A? = 0000 pour FFD
+    printf("ats0A?\r"); //Envoi de la commande
+    wait_OK();      //attente r�ponse "\nOK\r"
+
+
+
+
 
     
     //boucle infinie pour test
