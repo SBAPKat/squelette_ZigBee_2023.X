@@ -173,7 +173,7 @@ void interrupt isr(void)
                     case 4: //\nOK\r    4 caract�res d�tect�s
                             flag_OK=1;
                     break;
-                    case 6:
+                    case 6: //\nOPEN\r    6 caract�res d�tect�s
                             flag_OPEN=1;
                     break;
 
@@ -263,9 +263,9 @@ void wait_CONNECT(){
 
 void wait_OPEN(){
     //attente connexion avec r�ponse : CONNECT  "0012-6F-00C726"\r
-    Start='O';
-    Start1='P';
-    Start2='E';
+    Start='\n';
+    Start1='O';
+    Start2='P';
     flag_OPEN=0;
     while(!flag_OPEN){   //pr�voir une sortie de cette boucle
         flag_OPEN=0;
