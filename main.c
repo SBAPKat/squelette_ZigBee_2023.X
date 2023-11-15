@@ -79,9 +79,9 @@ void main(void)
 
     //setup sécurité
     //Network Key
-    printf("ats08=09000000000660000000000000000011");
+    printf("ats08=09000000000660000000000000000011:password\r");
     //link key
-    printf("ats09=09000000000660000000000000000011");
+    printf("ats09=09000000000660000000000000000011:password\r");
 
     //activer la sécurité S0A bit 8 = 1, 4 = 1 et 2 = 1 + end device
     printf("ats0A=4276");
