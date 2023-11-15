@@ -173,10 +173,14 @@ void interrupt isr(void)
                     case 4: //\nOK\r    4 caract�res d�tect�s
                             flag_OK=1;
                     break;
+                    case 6:
+                            flag_OPEN=1;
+                    break;
 
                     case 26: //CONNECT  "0012-6F-00C726"\r soit 26 caract�res d�tect�s
                             flag_CONNECT=1;
                     break;
+                    
 
                     default: //erreur de d�tection
                             //printf("Error\r\n");
