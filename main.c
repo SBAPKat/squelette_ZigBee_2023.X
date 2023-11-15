@@ -2,7 +2,7 @@
  * File:   main.c
  * programmation de l'UART du PIC18F45K20 par interruption
  * Author: Jules et Benjamin
- * TP EN51: Mise en oeuvre technologie ZigBee et Bluetooth
+ * TP EN51: trop de code
  * Created on 13 septembre 2018, 08:51
  * Modifi� le 23/10/2023
  *  - D�tection message : <LF>OK<CR> idem \nOK\r\n
