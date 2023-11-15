@@ -111,6 +111,14 @@ void main(void)
     Delay1Second();
     //eteindre la led D4
     printf("ats18=00000001\r"); //data register
+    wait_OK();
+
+    //Allumer la led D5 distante (coordonnateur)
+    printf("atrems=0000,16=00000002\r"); //data direction register
+    wait_OK();
+    printf("atrems=0000,18=00000000\r"); //data registerO
+    wait_OK();
+
 
 
 
