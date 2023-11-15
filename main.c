@@ -12,6 +12,7 @@
  * 
  * ADRESSE MAC 1 : 000D6F000B30825F
  * ADRESSE MAC 2: 000D6F000B30C4A4
+ * RES : JPAN:25,3AF6,9B0864BF332F58B8
  */
 
 #include <xc.h>
@@ -84,7 +85,7 @@ void main(void)
     printf("ats09=09000000000660000000000000000011:password\r");
 
     //activer la sécurité S0A bit 8 = 1, 4 = 1 et 2 = 1 + end device
-    printf("ats0A=4276");
+    printf("ats0A=4276:password\r");
     wait_OK();
 
 
