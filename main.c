@@ -72,6 +72,11 @@ void main(void)
     printf("ats0A?\r"); //Envoi de la commande
     wait_OK();      //attente r�ponse "\nOK\r"
 
+    //demander adresse mac
+    printf("ati\r"); //Envoi de la commande
+    wait_OK();      //attente r�ponse "\nOK\r"
+    
+
 
 
 
