@@ -76,7 +76,16 @@ void main(void)
     //demander adresse mac
     printf("ati\r"); //Envoi de la commande
     wait_OK();      //attente r�ponse "\nOK\r"
-    
+
+    //setup sécurité
+    //Network Key
+    printf("ats08=09000000000660000000000000000011");
+    //link key
+    printf("ats09=09000000000660000000000000000011");
+
+    //activer la sécurité S0A bit 8 = 1, 4 = 1 et 2 = 1 + end device
+    printf("ats0A=4276");
+    wait_OK();
 
 
 
