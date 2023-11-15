@@ -124,9 +124,14 @@ void main(void)
     //entrer data mode
     printf("AT+DMODE:0000\r");
     wait_OPEN();
-    printf("Hello from data mode");
-    printf("+++"); //quitter data mode
-
+    printf("Hello from data mode\r");
+    //quitter data mode
+    Delay100_ms();
+    printf("+");
+    Delay100_ms();
+    printf("+");
+    Delay100_ms();
+    printf("+");
 
 
 
